@@ -1,11 +1,12 @@
 #!/bin/bash
 
 mkdir ~/Dropbox
+mkdir -p ~/{Documents,Music,.purple}
 ln -s ~/Documents ~/Dropbox/Documents
 ln -s ~/Music ~/Dropbox/Music
-mkdir -p ~/.purple 
 ln -s ~/.purple ~/Dropbox/.config/.purple
 # TODO: Copy SSH keys?
+# TODO: Copy Firefox profiles?
 # TODO: Prompt user to install Dropbox and use ~/Dropbox as installation dir.
 
 # TODO: Install typefaces
