@@ -8,6 +8,10 @@ ln -s ~/Dropbox/Music
 
 # TODO: Install typefaces
 
+# Copy Vim configuration
 cp ./.vim ~/.vim
 cp ./.vimrc ~/.vimrc
+
+# Install Pathogen
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
