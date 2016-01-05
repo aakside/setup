@@ -9,9 +9,18 @@ ln -s ~/Dropbox/Music
 # TODO: Install typefaces
 
 # Copy Vim configuration
-cp ./.vim ~/.vim
 cp ./.vimrc ~/.vimrc
 
 # Install Pathogen
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+mkdir -p ~/.vim/{autoload,bundle} && \
+  curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
+# TODO: Check that git is installed
+
+# Install Vim plugins
+git clone --depth=1 https://github.com/rust-lang/rust.vim.git ~/.vim/bundle/rust.vim
+git clone https://github.com/fatih/vim-go.git ~/.vim/bundle/vim-go
+mkdir -p ~/.vim/{ftdetect,indent,syntax} && \
+  for d in ftdetect indent syntax ; do curl -o ~/.vim/$d/scala.vim https://raw.githubusercontent.com/derekwyatt/vim-scala/master/$d/scala.vim; done
+git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script/
+curl -o ~/.vim/colors/mustang.vim https://raw.githubusercontent.com/croaker/mustang-vim/master/colors/mustang.vim
