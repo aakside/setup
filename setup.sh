@@ -1,8 +1,10 @@
 #!/bin/bash
 
 mkdir ~/Dropbox
-ln -s ~/Dropbox/Documents
-ln -s ~/Dropbox/Music
+ln -s ~/Documents ~/Dropbox/Documents
+ln -s ~/Music ~/Dropbox/Music
+mkdir -p ~/.purple 
+ln -s ~/.purple ~/Dropbox/.config/.purple
 # TODO: Copy SSH keys?
 # TODO: Prompt user to install Dropbox and use ~/Dropbox as installation dir.
 
