@@ -1,5 +1,16 @@
 #!/bin/bash
 
+set -e
+
+# Vertify git is installed
+which git > /dev/null
+if [ $? -ne 0 ]; then
+  echo "Install git."
+  exit 1
+fi
+
+# TODO: Configure git
+
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ASSETS=$DIR/../assets
 
@@ -21,8 +32,6 @@ cp $ASSETS/.vimrc ~/.vimrc
 # Install Pathogen
 mkdir -p ~/.vim/{autoload,bundle,colors,ftdetect,indent,syntax} && \
   curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-# TODO: Check that git is installed
 
 # Install Vim plugins
 git clone --depth=1 https://github.com/rust-lang/rust.vim.git ~/.vim/bundle/rust.vim
