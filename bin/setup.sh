@@ -1,5 +1,8 @@
 #!/bin/bash
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ASSETS=$DIR/../assets
+
 mkdir -p ~/{Documents,Dropbox,Music,.purple}
 mkdir -p ~/Dropbox/.config
 ln -s ~/Documents ~/Dropbox/Documents
@@ -13,7 +16,7 @@ ln -s ~/.purple ~/Dropbox/.config/.purple # TODO: Link if OS is Ubuntu?
 # TODO: Install typefaces
 
 # Copy Vim configuration
-cp ./.vimrc ~/.vimrc
+cp $ASSETS/.vimrc ~/.vimrc
 
 # Install Pathogen
 mkdir -p ~/.vim/{autoload,bundle,colors,ftdetect,indent,syntax} && \
