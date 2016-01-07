@@ -4,10 +4,11 @@ mkdir -p ~/{Documents,Dropbox,Music,.purple}
 mkdir -p ~/Dropbox/.config
 ln -s ~/Documents ~/Dropbox/Documents
 ln -s ~/Music ~/Dropbox/Music
-ln -s ~/.purple ~/Dropbox/.config/.purple # TODO: Link if Ubuntu
+ln -s ~/.purple ~/Dropbox/.config/.purple # TODO: Link if OS is Ubuntu?
 # TODO: Copy SSH keys?
 # TODO: Copy Firefox profiles?
-# TODO: Prompt user to install Dropbox and use ~/Dropbox as installation dir.
+# TODO: Prompt user to install Dropbox and use ~/Dropbox as "Dropbox folder."
+#       This has not been trivial.
 
 # TODO: Install typefaces
 
