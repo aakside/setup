@@ -41,3 +41,4 @@ curl -o ~/.vim/indent/scala.vim https://raw.githubusercontent.com/derekwyatt/vim
 curl -o ~/.vim/syntax/scala.vim https://raw.githubusercontent.com/derekwyatt/vim-scala/master/syntax/scala.vim
 git clone https://github.com/kchmck/vim-coffee-script.git ~/.vim/bundle/vim-coffee-script/
 curl -o ~/.vim/colors/mustang.vim https://raw.githubusercontent.com/croaker/mustang-vim/master/colors/mustang.vim
+git clone https://github.com/leafgarland/typescript-vim.git ~/.vim/bundle/typescript-vim
