@@ -9,10 +9,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-# TODO: Configure git
-
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ASSETS=$DIR/../assets
+
+# TODO: Configure git
+cp $ASSETS/.gitignore ~/.gitignore
+git config --global core.excludesfile ~/.gitignore
 
 mkdir -p ~/{Documents,Dropbox,Music,.purple}
 mkdir -p ~/Dropbox/.config
