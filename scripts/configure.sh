@@ -2,27 +2,54 @@
 
 set -e
 
-# Vertify git is installed
-which git > /dev/null
-if [ $? -ne 0 ]; then
-  echo "Install git."
-  exit 1
+# Check OS. Taken from https://askubuntu.com/questions/459402/how-to-know-if-the-running-platform-is-ubuntu-or-centos-with-help-of-a-bash-scri
+UNAME=$(uname | tr "[:upper:]" "[:lower:]")
+# If Linux, try to determine specific distribution
+if [ "$UNAME" == "linux" ]; then
+    # If available, use LSB to identify distribution
+    if [ -f /etc/lsb-release -o -d /etc/lsb-release.d ]; then
+        export DISTRO=$(lsb_release -i | cut -d: -f2 | sed s/'^\t'//)
+    # Otherwise, use release info file
+    else
+        export DISTRO=$(ls -d /etc/[A-Za-z]*[_-][rv]e[lr]* | grep -v "lsb" | cut -d'/' -f3 | cut -d'-' -f1 | cut -d'_' -f1)
+    fi
+fi
+# For everything else (or if above failed), just use generic identifier
+[ "$DISTRO" == "" ] && export DISTRO=$UNAME
+unset UNAME
+
+mkdir -p ~/{Documents,Dropbox,Music}
+mkdir -p ~/Dropbox/.config
+ln -sfn ~/Documents ~/Dropbox/Documents
+
+if [ "$DISTRO" == "Ubuntu" ]; then
+  mkdir -p ~/.purple && ln -sfn ~/.purple ~/Dropbox/.config/.purple
+  sudo apt install ack git curl vim
+fi
+
+if [ "$DISTRO" == "darwin" ]; then
+  mkdir -p ~/Music/Library
+  ln -sfn ~/Music/Library ~/Dropbox/Music
+  xcode-select --install && \
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
+    brew install ack coreutils ffmpeg flac gdbm gettext glib gnutls gradle \
+    jpeg lame libogg libpng libtiff libvorbis libvpx libyaml node openjpeg \
+    openssl pcre readline sbt sqlite webp wget x264 x265 xvid yarn
+else
+  ln -sfn ~/Music ~/Dropbox/Music
 fi
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ASSETS=$DIR/../assets
 
-# TODO: Configure git
+# Configure git
 cp $ASSETS/.gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
+git config --global core.editor vim
+git config --global user.name "Alvin Khaled"
+git config --global user.email aakside@gmail.com
 
-mkdir -p ~/{Documents,Dropbox,Music,.purple}
-mkdir -p ~/Dropbox/.config
-ln -s ~/Documents ~/Dropbox/Documents
-ln -s ~/Music ~/Dropbox/Music
-ln -s ~/.purple ~/Dropbox/.config/.purple # TODO: Link if OS is Ubuntu?
 # TODO: Copy SSH keys?
-# TODO: Copy Firefox profiles?
 # TODO: Prompt user to install Dropbox and use ~/Dropbox as "Dropbox folder."
 #       This has not been trivial.
 
