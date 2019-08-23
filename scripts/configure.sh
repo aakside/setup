@@ -30,6 +30,7 @@ fi
 if [ "$DISTRO" == "darwin" ]; then
   mkdir -p ~/Music/Library
   ln -sfn ~/Music/Library ~/Dropbox/Music
+  cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile
   xcode-select --install && \
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
     brew install ack coreutils ffmpeg flac gdbm gettext glib gnutls gradle \

@@ -1,0 +1,5 @@
+alias l='ls -C'
+alias la='ls -A'
+alias ll='ls -al'
+alias ls='ls -GF'
+alias dus='du -sch .[!.]* * | gsort -h'
