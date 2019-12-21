@@ -18,9 +18,13 @@ fi
 [ "$DISTRO" == "" ] && export DISTRO=$UNAME
 unset UNAME
 
+DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ASSETS=$DIR/../assets
+
 mkdir -p ~/{Documents,Dropbox,Music}
 mkdir -p ~/Dropbox/.config
 ln -sfn ~/Documents ~/Dropbox/Documents
+cp $ASSETS/.bash_functions ~/.bash_functions && echo 'source ~/.bash_functions' >>~/.bash_profile
 
 if [ "$DISTRO" == "Ubuntu" ]; then
   mkdir -p ~/.purple && ln -sfn ~/.purple ~/Dropbox/.config/.purple
@@ -33,21 +37,19 @@ if [ "$DISTRO" == "darwin" ]; then
   cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile
   xcode-select --install && \
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
-    brew install ack coreutils ffmpeg flac gdbm gettext glib gnutls gradle \
-    jpeg lame libogg libpng libtiff libvorbis libvpx libyaml node openjpeg \
-    openssl pcre readline sbt sqlite webp wget x264 x265 xvid yarn
+    brew install ack coreutils ffmpeg flac gdbm gettext glib gnutls \
+    adoptopenjdk gradle jpeg lame libogg libpng libtiff libvorbis libvpx \
+    libyaml node openjpeg openssl pcre readline sbt sqlite webp wget x264 x265 \
+    xvid yarn
 else
   ln -sfn ~/Music ~/Dropbox/Music
 fi
-
-DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-ASSETS=$DIR/../assets
 
 # Configure git
 cp $ASSETS/.gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
 git config --global core.editor vim
-git config --global user.name "Alvin Khaled"
+git config --global user.name "Alvin Ali Khaled"
 git config --global user.email aakside@gmail.com
 
 # TODO: Copy SSH keys?
