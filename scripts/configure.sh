@@ -26,7 +26,26 @@ mkdir -p ~/Music/Library
 cp $ASSETS/.bash_functions ~/.bash_functions && echo 'source ~/.bash_functions' >>~/.bash_profile
 
 if [ "$DISTRO" == "Ubuntu" ]; then
-  sudo apt install ack git curl vim
+  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo apt-key fingerprint 0EBFCD88 && sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  sudo apt update && sudo apt install \
+    ack \
+    git \
+    curl \
+    vim \
+    nodejs \
+    yarn \
+    syncthing \
+    apt-transport-https \
+    ca-certificates \
+    gnupg-agent \
+    software-properties-common \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io
+  sudo usermod -aG docker aak
+  sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
 fi
 
 if [ "$DISTRO" == "darwin" ]; then
