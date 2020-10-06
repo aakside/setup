@@ -24,8 +24,10 @@ ASSETS=$DIR/../assets
 mkdir -p ~/{Documents,Music}
 mkdir -p ~/Music/Library
 cp $ASSETS/.bash_functions ~/.bash_functions && echo 'source ~/.bash_functions' >>~/.bash_profile
+cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile
 
 if [ "$DISTRO" == "Ubuntu" ]; then
+  echo $ASSETS/.ubuntu_bash_aliases >> ~/.bash_aliases
   curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo apt-key fingerprint 0EBFCD88 && sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -49,6 +51,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
 fi
 
 if [ "$DISTRO" == "darwin" ]; then
+  echo $ASSETS/.macos_bash_aliases >> ~/.bash_aliases
   cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile
   xcode-select --install && \
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
