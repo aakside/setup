@@ -62,7 +62,7 @@ if [ "$DISTRO" == "darwin" ]; then
 fi
 
 # Configure git
-cp $ASSETS/.gitignore ~/.gitignore
+cp $DIR/../.gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
 git config --global core.editor vim
 git config --global user.name "Alvin Ali Khaled"
