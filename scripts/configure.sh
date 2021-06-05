@@ -59,6 +59,8 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   sudo usermod -aG docker ${USER}
   sudo chmod 666 /var/run/docker.sock
   sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+  echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
+  sudo sh -c 'echo 204800 > /proc/sys/fs/inotify/max_user_watches'
 fi
 
 if [ "$DISTRO" == "darwin" ]; then
