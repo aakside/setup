@@ -28,13 +28,22 @@ cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.b
 
 if [ "$DISTRO" == "Ubuntu" ]; then
   echo $ASSETS/.ubuntu_bash_aliases >> ~/.bash_aliases
-  curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+  sudo apt install \
+    curl \
+    git
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+  nvm install node
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo apt-key fingerprint 0EBFCD88 && sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
+  cat signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+  echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |\
+    sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
   sudo apt update && sudo apt install \
     ack \
-    git \
-    curl \
     vim \
     nodejs \
     yarn \
@@ -45,8 +54,10 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     software-properties-common \
     docker-ce \
     docker-ce-cli \
-    containerd.io
-  sudo usermod -aG docker aak
+    containerd.io \
+    signal-desktop
+  sudo usermod -aG docker ${USER}
+  sudo chmod 666 /var/run/docker.sock
   sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
 fi
 
