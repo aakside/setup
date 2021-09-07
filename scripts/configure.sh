@@ -23,11 +23,10 @@ ASSETS=$DIR/../assets
 
 mkdir -p ~/{Documents,Music}
 mkdir -p ~/Music/Library
-cp $ASSETS/.bash_functions ~/.bash_functions && echo 'source ~/.bash_functions' >>~/.bash_profile
-cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile
+cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile && echo 'source ~/.bash_aliases' >>~/.zprofile
 
 if [ "$DISTRO" == "Ubuntu" ]; then
-  echo $ASSETS/.ubuntu_bash_aliases >> ~/.bash_aliases
+  cat $ASSETS/.ubuntu_bash_aliases >> ~/.bash_aliases
   sudo apt install \
     curl \
     git
@@ -64,8 +63,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
 fi
 
 if [ "$DISTRO" == "darwin" ]; then
-  echo $ASSETS/.macos_bash_aliases >> ~/.bash_aliases
-  cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile
+  cat $ASSETS/.macos_bash_aliases >> ~/.bash_aliases
   xcode-select --install && \
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
     brew install ack coreutils ffmpeg flac gdbm gettext glib gnutls \
