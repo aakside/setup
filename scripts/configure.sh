@@ -21,8 +21,11 @@ unset UNAME
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ASSETS=$DIR/../assets
 
-mkdir -p ~/{Documents,Music}
-mkdir -p ~/Music/Library
+mkdir -p ~/Code && cp $ASSETS/.stignore "$_"
+mkdir -p ~/Documents && cp $ASSETS/.stignore "$_"
+mkdir -p ~/Music/Library && cp $ASSETS/.stignore "$_"
+mkdir -p ~/"Mobile Downloads" && cp $ASSETS/.stignore "$_"
+
 cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile && echo 'source ~/.bash_aliases' >>~/.zprofile
 
 if [ "$DISTRO" == "Ubuntu" ]; then
