@@ -72,7 +72,9 @@ if [ "$DISTRO" == "darwin" ]; then
     brew install ack coreutils ffmpeg flac gdbm gettext glib gnutls \
     adoptopenjdk gradle jpeg lame libogg libpng libtiff libvorbis libvpx \
     libyaml node openjpeg openssl pcre readline sbt sqlite webp wget x264 x265 \
-    xvid yarn
+    xvid yarn && \
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/alvinkhaled/.zprofile && \
+    eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Configure git
