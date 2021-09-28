@@ -81,6 +81,7 @@ fi
 cp $DIR/../.gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
 git config --global core.editor vim
+git config --global pull.rebase true
 git config --global user.name "Alvin Ali Khaled"
 git config --global user.email aakside@gmail.com
 
