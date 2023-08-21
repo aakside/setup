@@ -78,6 +78,9 @@ if [ "$DISTRO" == "darwin" ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+echo 'eval "$(direnv hook bash)"' >>~/.bashrc
+echo 'eval "$(direnv hook zsh)"' >>~/.zshrc
+
 # Configure git
 cp $DIR/../.gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
@@ -85,8 +88,6 @@ git config --global core.editor vim
 git config --global pull.rebase true
 git config --global user.name "Alvin Ali Khaled"
 git config --global user.email aakside@gmail.com
-
-# TODO: Copy SSH keys?
 
 # TODO: Install typefaces
 
