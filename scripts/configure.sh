@@ -52,6 +52,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     syncthing \
     apt-transport-https \
     ca-certificates \
+    direnv \
     gnupg-agent \
     software-properties-common \
     docker-ce \
