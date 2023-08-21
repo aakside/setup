@@ -53,12 +53,15 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     apt-transport-https \
     ca-certificates \
     direnv \
+    flatpak \
+    gnome-software-plugin-flatpak \
     gnupg-agent \
     software-properties-common \
     docker-ce \
     docker-ce-cli \
     containerd.io \
     signal-desktop
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   sudo usermod -aG docker ${USER}
   sudo chmod 666 /var/run/docker.sock
   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
