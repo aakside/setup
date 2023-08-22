@@ -1,0 +1,12 @@
+@eaDir
+(?d).DS_Store
+node_modules
+build
+builddir
+target
+__pycache__
+.next
+dist
+.cache/*
+volumes/*
+.svelte-kit
