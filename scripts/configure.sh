@@ -32,7 +32,8 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   cat $ASSETS/.ubuntu_bash_aliases >> ~/.bash_aliases
   sudo apt install \
     curl \
-    git
+    git \
+    -y
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -47,22 +48,43 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   sudo add-apt-repository ppa:agornostal/ulauncher
   sudo apt update && sudo apt install \
     ack \
+    build-essential \
+    g++ \
+    gcc \
     vim \
     nodejs \
-    yarn \
-    syncthing \
     apt-transport-https \
     ca-certificates \
+    check \
+    containerd.io \
     direnv \
-    flatpak \
-    gnome-software-plugin-flatpak \
-    gnupg-agent \
-    software-properties-common \
+    doxygen \
     docker-ce \
     docker-ce-cli \
-    containerd.io \
+    flatpak \
+    gnome-software-plugin-flatpak \
+    gnome-tweaks \
+    gnupg-agent \
+    graphviz \
+    libcairo2-dev \
+    libevdev-dev \
+    libglib2.0-dev \
+    libgtk-3-dev \
+    libmtdev-dev \
+    libsystemd-dev \
+    libudev-dev \
+    libwacom-dev \
+    meson \
+    pkg-config \
+    python3-pytest-xdist \
+    python3-recommonmark \
+    python3-sphinx \
+    python3-sphinx-rtd-theme \
     signal-desktop \
+    syncthing \
+    software-properties-common \
     ulauncher \
+    valgrind \
     -y
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   sudo usermod -aG docker ${USER}
@@ -70,6 +92,8 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
   echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
   sudo sh -c 'echo 204800 > /proc/sys/fs/inotify/max_user_watches'
+  gsettings set org.gnome.desktop.interface clock-show-seconds true
+  gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag false
 fi
 
 if [ "$DISTRO" == "darwin" ]; then
@@ -78,15 +102,16 @@ if [ "$DISTRO" == "darwin" ]; then
   xcode-select --install && \
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
     brew install ack coreutils direnv ffmpeg flac gdbm gettext glib gnutls \
-    gradle jpeg lame libogg libpng libtiff libvorbis libvpx \
-    libyaml node openjpeg openssl pcre readline sbt sqlite webp wget x264 x265 \
-    xvid yarn && \
+    gradle jpeg lame libogg libpng libtiff libvorbis libvpx libyaml node \
+    openjpeg openssl pcre readline sbt sqlite webp wget x264 x265 xvid && \
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/alvinkhaled/.zprofile && \
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 echo 'eval "$(direnv hook bash)"' >>~/.bashrc
 echo 'eval "$(direnv hook zsh)"' >>~/.zshrc
+
+corepack enable
 
 # Configure git
 cp $DIR/../.gitignore ~/.gitignore
