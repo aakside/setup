@@ -21,10 +21,10 @@ unset UNAME
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ASSETS=$DIR/../assets
 
-mkdir -p ~/Code && cp $ASSETS/.stignore "$_"
-mkdir -p ~/Documents && cp $ASSETS/.stignore "$_"
-mkdir -p ~/Music/Library && cp $ASSETS/.stignore "$_"
-mkdir -p ~/"Mobile Downloads" && cp $ASSETS/.stignore "$_"
+mkdir -p ~/Code && cp $ASSETS/.stignore "$_" && cp $ASSETS/default_stignore "$_/stignore"
+mkdir -p ~/Documents && cp $ASSETS/.stignore "$_" && cp $ASSETS/default_stignore "$_/stignore"
+mkdir -p ~/Music/Library && cp $ASSETS/.stignore "$_" && cp $ASSETS/default_stignore "$_/stignore"
+mkdir -p ~/"Mobile Downloads" && cp $ASSETS/.stignore "$_" && cp $ASSETS/default_stignore "$_/stignore"
 
 cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile && echo 'source ~/.bash_aliases' >>~/.zprofile
 
