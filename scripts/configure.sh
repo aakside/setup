@@ -34,11 +34,6 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     curl \
     git \
     -y
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-  nvm install node
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo apt-key fingerprint 0EBFCD88 && sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
@@ -52,7 +47,6 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     g++ \
     gcc \
     vim \
-    nodejs \
     apt-transport-https \
     ca-certificates \
     check \
@@ -85,6 +79,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     software-properties-common \
     ulauncher \
     valgrind \
+    zsh \
     -y
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
   sudo usermod -aG docker ${USER}
@@ -102,7 +97,7 @@ if [ "$DISTRO" == "darwin" ]; then
   xcode-select --install && \
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
     brew install ack coreutils direnv ffmpeg flac gdbm gettext glib gnutls \
-    gradle jpeg lame libogg libpng libtiff libvorbis libvpx libyaml node \
+    gradle jpeg lame libogg libpng libtiff libvorbis libvpx libyaml \
     openjpeg openssl pcre readline sbt sqlite webp wget x264 x265 xvid && \
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> /Users/alvinkhaled/.zprofile && \
     eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -110,7 +105,16 @@ fi
 
 echo 'eval "$(direnv hook bash)"' >>~/.bashrc
 echo 'eval "$(direnv hook zsh)"' >>~/.zshrc
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+# Install fnm and nodejs
+curl -fsSL https://fnm.vercel.app/install | bash
+fnm completions --shell bash | sudo tee /usr/share/bash-completion/completions/fnm > /dev/null
+mkdir -p ~/.oh-my-zsh/completions
+fnm completions --shell zsh > ~/.oh-my-zsh/completions/_fnm
+echo 'eval "$(fnm env --use-on-cd)"' >>~/.bashrc
+echo 'eval "$(fnm env --use-on-cd)"' >>~/.zshrc
+fnm use 18
 corepack enable
 
 # Configure git
