@@ -109,6 +109,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # Install fnm and nodejs
 curl -fsSL https://fnm.vercel.app/install | bash
+source /home/aak/.bashrc
 fnm completions --shell bash | sudo tee /usr/share/bash-completion/completions/fnm > /dev/null
 mkdir -p ~/.oh-my-zsh/completions
 fnm completions --shell zsh > ~/.oh-my-zsh/completions/_fnm
