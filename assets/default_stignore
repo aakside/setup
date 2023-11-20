@@ -10,3 +10,4 @@ dist
 .cache/*
 volumes/*
 .svelte-kit
+.mypy_cache
