@@ -89,6 +89,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   sudo sh -c 'echo 204800 > /proc/sys/fs/inotify/max_user_watches'
   gsettings set org.gnome.desktop.interface clock-show-seconds true
   gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag false
+  mkdir -p ~/bin && wget --no-check-certificate https://www.styluslabs.com/download/write-tgz -O write-tgz && tar -xzf write-tgz -C ~/bin && rm write-tgz && cd ~/bin/Write && ./setup.sh
 fi
 
 if [ "$DISTRO" == "darwin" ]; then
