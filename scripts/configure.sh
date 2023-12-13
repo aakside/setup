@@ -50,6 +50,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     apt-transport-https \
     ca-certificates \
     check \
+    cifs-utils \
     containerd.io \
     direnv \
     doxygen \
@@ -60,6 +61,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     gnome-tweaks \
     gnupg-agent \
     graphviz \
+    keyutils \
     libcairo2-dev \
     libevdev-dev \
     libglib2.0-dev \
