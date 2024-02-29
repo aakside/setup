@@ -11,3 +11,4 @@ dist
 volumes/*
 .svelte-kit
 .mypy_cache
+.yarn
