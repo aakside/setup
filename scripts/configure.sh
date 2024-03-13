@@ -81,6 +81,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     software-properties-common \
     ulauncher \
     valgrind \
+    webp-pixbuf-loader \
     zsh \
     -y
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
