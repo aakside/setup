@@ -82,4 +82,7 @@ endif
 
 call plug#begin()
 Plug 'sheerun/vim-polyglot'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 call plug#end()
