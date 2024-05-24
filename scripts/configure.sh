@@ -113,13 +113,13 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # Install fnm and nodejs
 curl -fsSL https://fnm.vercel.app/install | bash
-source /home/aak/.bashrc
+source ~/.bashrc
 fnm completions --shell bash | sudo tee /usr/share/bash-completion/completions/fnm > /dev/null
 mkdir -p ~/.oh-my-zsh/completions
 fnm completions --shell zsh > ~/.oh-my-zsh/completions/_fnm
 echo 'eval "$(fnm env --use-on-cd)"' >>~/.bashrc
 echo 'eval "$(fnm env --use-on-cd)"' >>~/.zshrc
-fnm use 18
+fnm use 20
 corepack enable
 
 # Configure git
@@ -138,6 +138,10 @@ cp $ASSETS/.vimrc ~/.vimrc
 # Install Pathogen
 mkdir -p ~/.vim/{autoload,bundle,colors,ftdetect,indent,syntax} && \
   curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+# Install Plug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Install Vim plugins
 curl -o ~/.vim/colors/mustang.vim https://raw.githubusercontent.com/croaker/mustang-vim/master/colors/mustang.vim
