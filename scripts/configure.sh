@@ -98,6 +98,7 @@ fi
 if [ "$DISTRO" == "darwin" ]; then
   cat $ASSETS/.macos_bash_aliases >> ~/.bash_aliases
   defaults write com.apple.desktopservices DSDontWriteNetworkStores true
+  defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
   xcode-select --install && \
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
     brew install ack coreutils direnv ffmpeg flac gdbm gettext glib gnutls \
