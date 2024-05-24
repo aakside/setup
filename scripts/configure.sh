@@ -139,9 +139,5 @@ cp $ASSETS/.vimrc ~/.vimrc
 mkdir -p ~/.vim/{autoload,bundle,colors,ftdetect,indent,syntax} && \
   curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-# Install Plug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 # Install Vim plugins
 curl -o ~/.vim/colors/mustang.vim https://raw.githubusercontent.com/croaker/mustang-vim/master/colors/mustang.vim
