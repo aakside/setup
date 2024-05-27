@@ -76,6 +76,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     python3-recommonmark \
     python3-sphinx \
     python3-sphinx-rtd-theme \
+    ripgrep \
     signal-desktop \
     syncthing \
     software-properties-common \
@@ -103,7 +104,7 @@ if [ "$DISTRO" == "darwin" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
     brew install ack coreutils direnv ffmpeg flac gdbm gettext glib gnutls \
     gradle jpeg lame libogg libpng libtiff libvorbis libvpx libyaml \
-    openjpeg openssl pcre readline sbt sqlite webp wget x264 x265 xvid && \
+    openjpeg openssl pcre readline ripgrep sbt sqlite webp wget x264 x265 xvid && \
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile && \
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
