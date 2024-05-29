@@ -67,6 +67,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     libglib2.0-dev \
     libgtk-3-dev \
     libmtdev-dev \
+    libssl-dev \
     libsystemd-dev \
     libudev-dev \
     libwacom-dev \
