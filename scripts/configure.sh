@@ -62,6 +62,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     gnupg-agent \
     graphviz \
     keyutils \
+    libbz2-dev \
     libcairo2-dev \
     libevdev-dev \
     libffi-dev \
