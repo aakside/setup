@@ -64,14 +64,18 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     keyutils \
     libcairo2-dev \
     libevdev-dev \
+    libffi-dev \
     libglib2.0-dev \
     libgtk-3-dev \
     libmtdev-dev \
+    libsqlite3-dev \
+    libreadline-dev \
     libssl-dev \
     libsystemd-dev \
     libudev-dev \
     libwacom-dev \
     meson \
+    ncurses-dev \
     pkg-config \
     python3-pytest-xdist \
     python3-recommonmark \
@@ -79,8 +83,10 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     python3-sphinx-rtd-theme \
     ripgrep \
     signal-desktop \
+    sqlite3 \
     syncthing \
     software-properties-common \
+    tk-dev \
     ulauncher \
     valgrind \
     webp-pixbuf-loader \
