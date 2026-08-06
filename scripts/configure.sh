@@ -169,7 +169,7 @@ command -v corepack >/dev/null 2>&1 || npm install -g corepack
 corepack enable
 
 # Install uv
-curl -LsSf https://astral.sh/uv/install.sh | sh -s -- --no-modify-path
+UV_NO_MODIFY_PATH=1 curl -LsSf https://astral.sh/uv/install.sh | sh -s --
 
 uv tool install jrnl
 
