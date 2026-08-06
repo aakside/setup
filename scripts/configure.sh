@@ -49,10 +49,6 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     -y
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo apt-key fingerprint 0EBFCD88 && sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
-  cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
-  echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |\
-    sudo tee /etc/apt/sources.list.d/signal-xenial.list
   sudo add-apt-repository ppa:agornostal/ulauncher
   sudo apt update && sudo apt install \
     ack \
@@ -96,7 +92,6 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     python3-sphinx \
     python3-sphinx-rtd-theme \
     ripgrep \
-    signal-desktop \
     sqlite3 \
     syncthing \
     software-properties-common \
