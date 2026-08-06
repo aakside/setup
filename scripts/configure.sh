@@ -139,13 +139,16 @@ append_once 'eval "$(direnv hook zsh)"' ~/.zshrc
 # and halting the rest of this script.
 [ -d "$HOME/.oh-my-zsh" ] || RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# Install fnm and nodejs
-curl -fsSL https://fnm.vercel.app/install | bash
-source ~/.bashrc
+# Install fnm and nodejs. --skip-shell stops the installer from appending its own block to the rc files on every run
+curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
+export PATH="$HOME/.local/share/fnm:$PATH"
+eval "$(fnm env)"
 fnm completions --shell bash | sudo tee /usr/share/bash-completion/completions/fnm > /dev/null
 mkdir -p ~/.oh-my-zsh/completions
 fnm completions --shell zsh > ~/.oh-my-zsh/completions/_fnm
+append_once 'export PATH="$HOME/.local/share/fnm:$PATH"' ~/.bashrc
 append_once 'eval "$(fnm env --use-on-cd)"' ~/.bashrc
+append_once 'export PATH="$HOME/.local/share/fnm:$PATH"' ~/.zshrc
 append_once 'eval "$(fnm env --use-on-cd)"' ~/.zshrc
 fnm use lts/latest
 command -v corepack >/dev/null 2>&1 || npm install -g corepack
