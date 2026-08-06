@@ -140,6 +140,7 @@ if [ "$DISTRO" == "darwin" ]; then
     x265 \
     xvid
   brew list --cask ghostty >/dev/null 2>&1 || brew install --cask ghostty
+  brew list --cask font-dejavu >/dev/null 2>&1 || brew install --cask font-dejavu
   append_once 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi

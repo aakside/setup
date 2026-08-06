@@ -22,10 +22,7 @@ theme = Night Lion V2
 # background-blur = true
 
 # --- Font --------------------------------------------------------------------
-# Left to Ghostty's per-platform default monospace so this file stays portable.
-# To pin a font, install it on both machines and uncomment (falls back if
-# missing). Good cross-platform picks: "JetBrains Mono", "Fira Code".
-# font-family = "JetBrains Mono"
+font-family = "DejaVu Sans Mono"
 font-size = 12
 # Ligatures come free with the font; disable per-feature if you dislike them:
 # font-feature = -calt, -liga, -dlig
