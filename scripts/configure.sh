@@ -39,6 +39,10 @@ append_once 'source ~/.bash_aliases' ~/.zprofile
 
 if [ "$DISTRO" == "Ubuntu" ]; then
   cat $ASSETS/.ubuntu_bash_aliases >> ~/.bash_aliases
+  # Enable Ubuntu's stock colored prompt (green user@host, blue path). It's
+  # gated on TERM matching *-256color, which Ghostty's xterm-ghostty doesn't;
+  # flipping force_color_prompt on turns it on regardless of terminal.
+  sed -i 's/^#force_color_prompt=yes/force_color_prompt=yes/' ~/.bashrc
   sudo apt install \
     curl \
     git \
@@ -153,6 +157,10 @@ git config --global user.name "Alvin Ali Khaled"
 git config --global user.email aakside@gmail.com
 
 # TODO: Install typefaces
+
+# Copy Ghostty configuration (Ghostty reads this XDG path on both Linux and
+# macOS, so one file works everywhere).
+mkdir -p ~/.config/ghostty && cp $ASSETS/ghostty/config ~/.config/ghostty/config
 
 # Copy Vim configuration
 cp $ASSETS/.vimrc ~/.vimrc
