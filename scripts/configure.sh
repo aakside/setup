@@ -100,6 +100,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   gsettings set org.gnome.desktop.interface clock-show-seconds true
   gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag false
   mkdir -p ~/bin && wget --no-check-certificate https://www.styluslabs.com/download/write-tgz -O write-tgz && tar -xzf write-tgz -C ~/bin && rm write-tgz && cd ~/bin/Write && ./setup.sh
+  GHOSTTY_CONFIG_DIR="$HOME/.config/ghostty"
 fi
 
 if [ "$DISTRO" == "darwin" ]; then
@@ -144,6 +145,7 @@ if [ "$DISTRO" == "darwin" ]; then
   brew list --cask font-dejavu >/dev/null 2>&1 || brew install --cask font-dejavu
   append_once 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  GHOSTTY_CONFIG_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
 fi
 
 append_once 'eval "$(direnv hook bash)"' ~/.bashrc
@@ -183,9 +185,8 @@ git config --global user.email aakside@gmail.com
 
 # TODO: Install typefaces
 
-# Copy Ghostty configuration (Ghostty reads this XDG path on both Linux and
-# macOS, so one file works everywhere).
-mkdir -p ~/.config/ghostty && cp $ASSETS/ghostty/config ~/.config/ghostty/config
+# Copy ghostty configuration
+mkdir -p "$GHOSTTY_CONFIG_DIR" && cp "$ASSETS/ghostty/config" "$GHOSTTY_CONFIG_DIR/config"
 
 # Copy Vim configuration
 cp $ASSETS/.vimrc ~/.vimrc
