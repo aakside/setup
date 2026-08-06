@@ -118,9 +118,37 @@ if [ "$DISTRO" == "darwin" ]; then
   xcode-select -p >/dev/null 2>&1 || xcode-select --install
   command -v brew >/dev/null 2>&1 || \
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  brew install ack coreutils direnv ffmpeg flac gdbm gettext glib gnutls \
-    gradle jpeg lame libogg libpng libtiff libvorbis libvpx libyaml \
-    openjpeg openssl pcre readline ripgrep sbt sqlite webp wget x264 x265 xvid
+  brew install \
+    ack \
+    coreutils \
+    direnv \
+    ffmpeg \
+    flac \
+    gdbm \
+    gettext \
+    glib \
+    gnutls \
+    gradle \
+    jpeg \
+    lame \
+    libogg \
+    libpng \
+    libtiff \
+    libvorbis \
+    libvpx \
+    libyaml \
+    openjpeg \
+    openssl \
+    pcre \
+    readline \
+    ripgrep \
+    sbt \
+    sqlite \
+    webp \
+    wget \
+    x264 \
+    x265 \
+    xvid
   brew list --cask ghostty >/dev/null 2>&1 || brew install --cask ghostty
   append_once 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
