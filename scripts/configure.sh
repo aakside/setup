@@ -147,7 +147,8 @@ mkdir -p ~/.oh-my-zsh/completions
 fnm completions --shell zsh > ~/.oh-my-zsh/completions/_fnm
 append_once 'eval "$(fnm env --use-on-cd)"' ~/.bashrc
 append_once 'eval "$(fnm env --use-on-cd)"' ~/.zshrc
-fnm use 20
+fnm use lts/latest
+command -v corepack >/dev/null 2>&1 || npm install -g corepack
 corepack enable
 
 # Configure git
