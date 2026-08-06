@@ -175,6 +175,9 @@ fnm use lts/latest
 command -v corepack >/dev/null 2>&1 || npm install -g corepack
 corepack enable
 
+# Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh -s -- --no-modify-path
+
 # Configure git
 cp $DIR/../.gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
