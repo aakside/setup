@@ -107,6 +107,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     zsh \
     -y
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+  snap list ghostty >/dev/null 2>&1 || sudo snap install ghostty --classic
   sudo usermod -aG docker ${USER}
   sudo chmod 666 /var/run/docker.sock
   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
@@ -127,6 +128,7 @@ if [ "$DISTRO" == "darwin" ]; then
   brew install ack coreutils direnv ffmpeg flac gdbm gettext glib gnutls \
     gradle jpeg lame libogg libpng libtiff libvorbis libvpx libyaml \
     openjpeg openssl pcre readline ripgrep sbt sqlite webp wget x264 x265 xvid
+  brew list --cask ghostty >/dev/null 2>&1 || brew install --cask ghostty
   append_once 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
