@@ -11,7 +11,7 @@
 #   Catppuccin Mocha   (soft, low-contrast pastel)
 #   Gruvbox Dark       (warm, retro)
 #   One Half Dark      (clean, VS Code-ish)
-theme = TokyoNight Night
+theme = Night Lion V2
 
 # Want a pure-black background instead of the theme's near-black? Uncomment:
 # background = #000000
