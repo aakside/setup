@@ -49,6 +49,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     -y
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo apt-key fingerprint 0EBFCD88 && sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  sudo add-apt-repository -y ppa:mkasberg/ghostty-ubuntu
   sudo apt update && sudo apt install \
     ack \
     build-essential \
@@ -63,6 +64,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     docker-ce \
     docker-ce-cli \
     flatpak \
+    ghostty \
     gnome-software-plugin-flatpak \
     gnome-tweaks \
     gnupg-agent \
@@ -90,7 +92,6 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     zsh \
     -y
   flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-  snap list ghostty >/dev/null 2>&1 || sudo snap install ghostty --classic
   sudo usermod -aG docker ${USER}
   sudo chmod 666 /var/run/docker.sock
   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
