@@ -156,7 +156,8 @@ append_once 'eval "$(direnv hook zsh)"' ~/.zshrc
 curl -fsSL https://fnm.vercel.app/install | bash -s -- --skip-shell
 export PATH="$HOME/.local/share/fnm:$PATH"
 eval "$(fnm env)"
-fnm completions --shell bash | sudo tee /usr/share/bash-completion/completions/fnm > /dev/null
+mkdir -p ~/.local/share/bash-completion/completions
+fnm completions --shell bash > ~/.local/share/bash-completion/completions/fnm
 mkdir -p ~/.oh-my-zsh/completions
 fnm completions --shell zsh > ~/.oh-my-zsh/completions/_fnm
 append_once 'export PATH="$HOME/.local/share/fnm:$PATH"' ~/.bashrc
