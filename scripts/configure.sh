@@ -178,6 +178,8 @@ corepack enable
 # Install uv
 curl -LsSf https://astral.sh/uv/install.sh | sh -s -- --no-modify-path
 
+uv tool install jrnl
+
 # Configure git
 cp $DIR/../.gitignore ~/.gitignore
 git config --global core.excludesfile ~/.gitignore
