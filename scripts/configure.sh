@@ -21,12 +21,21 @@ unset UNAME
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ASSETS=$DIR/../assets
 
+# Append a line to a file only if it isn't already present, so re-running this
+# script doesn't accumulate duplicate lines. Creates the file if it's missing.
+append_once() {
+  local line="$1" file="$2"
+  grep -qxF -- "$line" "$file" 2>/dev/null || echo "$line" >>"$file"
+}
+
 mkdir -p ~/Code && cp $ASSETS/.stignore "$_" && cp $ASSETS/default_stignore "$_/stignore"
 mkdir -p ~/Documents && cp $ASSETS/.stignore "$_" && cp $ASSETS/default_stignore "$_/stignore"
 mkdir -p ~/Music/Library && cp $ASSETS/.stignore "$_" && cp $ASSETS/default_stignore "$_/stignore"
 mkdir -p ~/"Mobile Downloads" && cp $ASSETS/.stignore "$_" && cp $ASSETS/default_stignore "$_/stignore"
 
-cp $ASSETS/.bash_aliases ~/.bash_aliases && echo 'source ~/.bash_aliases' >>~/.bash_profile && echo 'source ~/.bash_aliases' >>~/.zprofile
+cp $ASSETS/.bash_aliases ~/.bash_aliases
+append_once 'source ~/.bash_aliases' ~/.bash_profile
+append_once 'source ~/.bash_aliases' ~/.zprofile
 
 if [ "$DISTRO" == "Ubuntu" ]; then
   cat $ASSETS/.ubuntu_bash_aliases >> ~/.bash_aliases
@@ -37,9 +46,9 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - && sudo apt-key fingerprint 0EBFCD88 && sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
-  cat signal-desktop-keyring.gpg | sudo tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+  cat signal-desktop-keyring.gpg | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
   echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |\
-    sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+    sudo tee /etc/apt/sources.list.d/signal-xenial.list
   sudo add-apt-repository ppa:agornostal/ulauncher
   sudo apt update && sudo apt install \
     ack \
@@ -97,7 +106,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   sudo usermod -aG docker ${USER}
   sudo chmod 666 /var/run/docker.sock
   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
-  echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
+  grep -qxF 'fs.inotify.max_user_watches=204800' /etc/sysctl.conf || echo "fs.inotify.max_user_watches=204800" | sudo tee -a /etc/sysctl.conf
   sudo sh -c 'echo 204800 > /proc/sys/fs/inotify/max_user_watches'
   gsettings set org.gnome.desktop.interface clock-show-seconds true
   gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag false
@@ -108,18 +117,21 @@ if [ "$DISTRO" == "darwin" ]; then
   cat $ASSETS/.macos_bash_aliases >> ~/.bash_aliases
   defaults write com.apple.desktopservices DSDontWriteNetworkStores true
   defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
-  xcode-select --install && \
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" && \
-    brew install ack coreutils direnv ffmpeg flac gdbm gettext glib gnutls \
+  xcode-select -p >/dev/null 2>&1 || xcode-select --install
+  command -v brew >/dev/null 2>&1 || \
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  brew install ack coreutils direnv ffmpeg flac gdbm gettext glib gnutls \
     gradle jpeg lame libogg libpng libtiff libvorbis libvpx libyaml \
-    openjpeg openssl pcre readline ripgrep sbt sqlite webp wget x264 x265 xvid && \
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile && \
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    openjpeg openssl pcre readline ripgrep sbt sqlite webp wget x264 x265 xvid
+  append_once 'eval "$(/opt/homebrew/bin/brew shellenv)"' ~/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-echo 'eval "$(direnv hook bash)"' >>~/.bashrc
-echo 'eval "$(direnv hook zsh)"' >>~/.zshrc
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+append_once 'eval "$(direnv hook bash)"' ~/.bashrc
+append_once 'eval "$(direnv hook zsh)"' ~/.zshrc
+# Skip if already installed; RUNZSH=no keeps the installer from exec'ing zsh
+# and halting the rest of this script.
+[ -d "$HOME/.oh-my-zsh" ] || RUNZSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Install fnm and nodejs
 curl -fsSL https://fnm.vercel.app/install | bash
@@ -127,8 +139,8 @@ source ~/.bashrc
 fnm completions --shell bash | sudo tee /usr/share/bash-completion/completions/fnm > /dev/null
 mkdir -p ~/.oh-my-zsh/completions
 fnm completions --shell zsh > ~/.oh-my-zsh/completions/_fnm
-echo 'eval "$(fnm env --use-on-cd)"' >>~/.bashrc
-echo 'eval "$(fnm env --use-on-cd)"' >>~/.zshrc
+append_once 'eval "$(fnm env --use-on-cd)"' ~/.bashrc
+append_once 'eval "$(fnm env --use-on-cd)"' ~/.zshrc
 fnm use 20
 corepack enable
 
