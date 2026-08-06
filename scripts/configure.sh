@@ -52,8 +52,6 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   sudo apt update && sudo apt install \
     ack \
     build-essential \
-    g++ \
-    gcc \
     vim \
     apt-transport-https \
     ca-certificates \
@@ -77,24 +75,16 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     libglib2.0-dev \
     libgtk-3-dev \
     libmtdev-dev \
-    libsqlite3-dev \
-    libreadline-dev \
     libssl-dev \
     libsystemd-dev \
     libudev-dev \
     libwacom-dev \
     meson \
-    ncurses-dev \
     pkg-config \
-    python3-pytest-xdist \
-    python3-recommonmark \
-    python3-sphinx \
-    python3-sphinx-rtd-theme \
     ripgrep \
     sqlite3 \
     syncthing \
     software-properties-common \
-    tk-dev \
     valgrind \
     webp-pixbuf-loader \
     zsh \
