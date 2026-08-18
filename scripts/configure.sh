@@ -163,9 +163,9 @@ fnm completions --shell bash > ~/.local/share/bash-completion/completions/fnm
 mkdir -p ~/.oh-my-zsh/completions
 fnm completions --shell zsh > ~/.oh-my-zsh/completions/_fnm
 append_once 'export PATH="$HOME/.local/share/fnm:$PATH"' ~/.bashrc
-append_once 'eval "$(fnm env --use-on-cd)"' ~/.bashrc
+append_once 'eval "$(fnm env --shell bash --use-on-cd)"' ~/.bashrc
 append_once 'export PATH="$HOME/.local/share/fnm:$PATH"' ~/.zshrc
-append_once 'eval "$(fnm env --use-on-cd)"' ~/.zshrc
+append_once 'eval "$(fnm env --shell zsh --use-on-cd)"' ~/.zshrc
 fnm use lts/latest
 command -v corepack >/dev/null 2>&1 || npm install -g corepack
 corepack enable
