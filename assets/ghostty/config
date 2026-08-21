@@ -40,8 +40,8 @@ mouse-hide-while-typing = true
 copy-on-select = clipboard
 clipboard-trim-trailing-spaces = true
 
-# ~10 MB of scrollback history
-scrollback-limit = 10000000
+# ~500 MB of scrollback history
+scrollback-limit = 500000000
 # reopen windows where you left them
 window-save-state = always
 # guard against accidentally closing a busy pane
