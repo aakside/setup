@@ -45,6 +45,8 @@ set guioptions-=t
 set number
 set nowrap
 
+set re=0
+
 if has("terminfo")
   let &t_Co=8
   let &t_Sf="\e[3%p1%dm"
