@@ -1,0 +1,19 @@
+--- a/src/evdev-mt-touchpad-gestures.c
++++ b/src/evdev-mt-touchpad-gestures.c
+@@ -1888,6 +1888,16 @@
+ static void
+ tp_gesture_handle_state_3fg_drag_or_swipe_start(struct tp_dispatch *tp, usec_t time)
+ {
++	/* Local accessibility preference: Magic Trackpad 2 motion always drags.
++	 * Keep other devices and four-finger gestures on the upstream path. */
++	unsigned int vendor = evdev_device_get_id_vendor(tp->device);
++	if (tp->drag_3fg.nfingers == 3 &&
++	    (vendor == 0x05ac || vendor == 0x004c) &&
++	    evdev_device_get_id_product(tp->device) == 0x0265) {
++		tp_gesture_handle_state_3fg_drag_start(tp, time);
++		return;
++	}
++
+ 	const struct normalized_coords zero = { 0.0, 0.0 };
+ 	gesture_notify_swipe(&tp->device->base,
+ 			     time,

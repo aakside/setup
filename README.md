@@ -17,7 +17,11 @@ scripts/three-finger-drag.sh disable
 
 Log out/in after installing or disabling. See
 [the helper documentation](assets/three-finger-drag/README.md) for dependencies,
-behavior, tests and rollback. System libinput packages are not replaced.
+behavior, tests and rollback. If three-finger drags switch workspaces, the optional
+`scripts/three-finger-drag.sh install-private` mode uses a version-pinned private
+build to make them consistently drag. See the helper documentation for its extra
+build dependencies and required maintenance after libinput upgrades. System
+libinput packages are not replaced.
 
 ## Magic Trackpad moves only when pressed or moved very fast
 
