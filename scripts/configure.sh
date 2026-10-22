@@ -77,6 +77,7 @@ if [ "$DISTRO" == "Ubuntu" ]; then
     libglib2.0-dev \
     libgtk-3-dev \
     libmtdev-dev \
+    libinput-dev \
     libssl-dev \
     libsystemd-dev \
     libudev-dev \
@@ -99,6 +100,15 @@ if [ "$DISTRO" == "Ubuntu" ]; then
   sudo sh -c 'echo 204800 > /proc/sys/fs/inotify/max_user_watches'
   gsettings set org.gnome.desktop.interface clock-show-seconds true
   gsettings set org.gnome.desktop.peripherals.touchpad tap-and-drag false
+  # Native three-finger drag requires libinput >= 1.28 and Ubuntu GNOME Wayland.
+  if [ "${XDG_SESSION_TYPE:-}" = wayland ] &&
+      [[ "${XDG_CURRENT_DESKTOP:-}" == *GNOME* ]] &&
+      pkg-config --atleast-version=1.28 libinput &&
+      systemctl --user is-active --quiet org.gnome.Shell@ubuntu.service; then
+    "$DIR/three-finger-drag.sh" install
+  else
+    echo "Skipping three-finger drag: requires libinput >= 1.28 and an active Ubuntu GNOME Wayland session."
+  fi
   mkdir -p ~/bin && wget --no-check-certificate https://www.styluslabs.com/download/write-tgz -O write-tgz && tar -xzf write-tgz -C ~/bin && rm write-tgz && cd ~/bin/Write && ./setup.sh
   GHOSTTY_CONFIG_DIR="$HOME/.config/ghostty"
 fi

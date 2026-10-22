@@ -1,0 +1,6 @@
+{
+  "30-vendor-starlabs.quirks": "a86585930dc5725c15a93d42fbb3731b6a235bb11fd7343dcc42dc8e4d735c46",
+  "50-framework.quirks": "0033ead9162c1ca277f6dcf0e6a52d90427909a84c47a729bbdaccf304526650",
+  "50-system-prestigio.quirks": "584f73bc965b7d03691315d8bde18d15afe5cd0a0a641d10c4eafa1e5af479cc",
+  "50-system-purism.quirks": "c6bc09ae46cebb313748d6e94d39edfbf33e65b0eb99124ffe1b81529fb54c0b"
+}
